@@ -4,39 +4,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Rohit ❤️ Nikita</title>
 <style>
-body{margin:0;font-family:Arial;background:linear-gradient(135deg,#ff9a9e,#fad0c4);height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;overflow:hidden}.card{background:white;padding:25px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.2);max-width:420px;z-index:2}
+body{margin:0;font-family:Arial;background:linear-gradient(135deg,#ff9a9e,#fad0c4);height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;overflow:hidden}.card{background:white;padding:25px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.2);max-width:420px;z-index:2;display:none;position:relative}
 
 h1{color:#e91e63}
 
-/* SLIDESHOW */ .slideshow{width:100%;height:240px;border-radius:15px;overflow:hidden;margin-bottom:10px;background:#000} .slideshow img{width:100%;height:240px;object-fit:contain;display:none;background:#000}
+.slideshow{width:100%;height:240px;border-radius:15px;overflow:hidden;margin-bottom:10px;background:#000} .slideshow img{width:100%;height:240px;object-fit:contain;display:none;background:#000}
 
 .buttons{margin-top:10px;position:relative;height:140px} button{padding:12px 25px;font-size:18px;border:none;border-radius:30px;cursor:pointer;position:absolute} #yesBtn{background:#e91e63;color:white;left:40px} #noBtn{background:#ccc;left:220px}
 
-#message{font-size:18px;color:#e91e63;margin-top:15px;display:none} #secret{display:none;margin-top:10px;font-size:16px;color:#ff1493;font-weight:bold}
+#message{font-size:18px;color:#e91e63;margin-top:15px;display:none}
 
-.heart,.rose,.fw{position:fixed;pointer-events:none} .heart{animation:floatUp 4s linear forwards} .rose{top:-20px;animation:fall linear forwards}
+/* Love Letter */ #letter{ display:none; position:fixed; inset:0; background:#000000cc; z-index:10; justify-content:center; align-items:center; } #letterBox{ background:white; padding:25px; border-radius:15px; max-width:320px; animation:pop .5s ease; } @keyframes pop{from{transform:scale(.5)}to{transform:scale(1)}}
 
-@keyframes floatUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-400px);opacity:0}} @keyframes fall{to{transform:translateY(110vh);opacity:.9}} @keyframes boom{0%{transform:scale(0);opacity:1}100%{transform:scale(3);opacity:0}}
+.heart,.rose,.ring{position:fixed;pointer-events:none} .heart{animation:floatUp 4s linear forwards} .rose{top:-20px;animation:fall linear forwards} .ring{font-size:40px;animation:ringPop 1.2s ease forwards}
 
-.fw{width:8px;height:8px;border-radius:50%;background:gold;animation:boom .8s linear forwards}
+@keyframes floatUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-400px);opacity:0}} @keyframes fall{to{transform:translateY(110vh);opacity:.9}} @keyframes ringPop{0%{transform:scale(0)}60%{transform:scale(1.4)}100%{transform:scale(1)}}
 
-/* PASSWORD SCREEN */ #lock{position:fixed;inset:0;background:#000000dd;display:flex;justify-content:center;align-items:center;z-index:5} #lockBox{background:white;padding:20px;border-radius:15px} </style>
+/* PASSWORD SCREEN */ #lock{position:fixed;inset:0;background:linear-gradient(135deg,#ff9a9e,#fad0c4);display:flex;justify-content:center;align-items:center;z-index:5} #lockBox{background:white;padding:25px;border-radius:15px} </style>
 
 </head>
-<body><!-- PASSWORD GATE --><div id="lock">
+<body><!-- PASSWORD --><div id="lock">
  <div id="lockBox">
   <h3>Enter Love Password 💖</h3>
-  <input id="pass" placeholder="Hint: her nickname"/>
+  <input id="pass" placeholder="Hint: your cute nickname"/>
   <br><br>
   <button onclick="unlock()">Open</button>
  </div>
-</div><div class="card"><div class="slideshow">
+</div><!-- MAIN --><div class="card" id="mainCard"><div class="slideshow">
  <img src="photo1.jpg">
  <img src="photo2.jpg">
  <img src="photo3.jpg">
  <img src="photo4.jpg">
  <img src="photo5.jpg">
- <img src="photo6.jpg">
 </div><h1>Nikita, will you be Rohit's Valentine? 💖</h1>
 <p>You make my world brighter every day ✨</p><div class="buttons">
  <button id="yesBtn">Yes ❤️</button>
@@ -46,23 +45,37 @@ I want to grow old with you, just like we’ve grown together all these years.<b
 I want to hug you after every long day, make you smile when you’re upset, and keep calling you paglu till we’re old and grey.<br>
 You are my comfort, my happiness, my home.<br><br>
 My sweetheart, my rashgulla, meri jaan, my candy — life feels perfect with you ❤️
-</div><div id="secret">🌹 "No matter how many lives I get, I will always choose you." 🌹</div>
-</div><!-- MAIN TERI HO GAYI SONG --><iframe width="0" height="0" 
-src="https://www.youtube.com/embed/0G2VxhV_gXM?autoplay=1&loop=1&playlist=0G2VxhV_gXM" 
-allow="autoplay"></iframe><script>
-/* PASSWORD */
+</div></div><!-- LOVE LETTER --><div id="letter">
+ <div id="letterBox">
+  <h3>💌 A Letter For You</h3>
+  <p>
+  Meeting you was luck,<br>
+  Loving you is magic,<br>
+  Staying with you forever is my dream ❤️
+  </p>
+  <button onclick="closeLetter()">Close 💖</button>
+ </div>
+</div><!-- SONG --><div id="song"></div><script>
 function unlock(){
- if(document.getElementById('pass').value.toLowerCase().includes('babu') || document.getElementById('pass').value.toLowerCase().includes('motu')){
+ let v=document.getElementById('pass').value.toLowerCase()
+ if(v.includes('babu')||v.includes('motu')){
    document.getElementById('lock').style.display='none'
+   document.getElementById('mainCard').style.display='block'
+   startSong()
  }else alert('Wrong 😜 Try again')
+}
+
+function startSong(){
+ document.getElementById('song').innerHTML=`
+ <iframe width="0" height="0"
+ src="https://www.youtube.com/embed/veDopcyPTLw?start=30&autoplay=1&loop=1&playlist=veDopcyPTLw"
+ allow="autoplay"></iframe>`
 }
 
 const noBtn=document.getElementById("noBtn")
 const yesBtn=document.getElementById("yesBtn")
 const msg=document.getElementById("message")
-const secret=document.getElementById("secret")
 
-/* RUNNING NO */
 function moveNo(){
  noBtn.style.left=Math.random()*250+"px"
  noBtn.style.top=Math.random()*100+"px"
@@ -70,15 +83,14 @@ function moveNo(){
 noBtn.addEventListener("mouseover",moveNo)
 noBtn.addEventListener("click",moveNo)
 
-/* YES */
+/* YES MAGIC */
 yesBtn.onclick=()=>{
  msg.style.display='block'
  for(let i=0;i<40;i++)heart()
- for(let i=0;i<30;i++)rose()
- fireworks()
+ for(let i=0;i<25;i++)rose()
+ showRing()
+ setTimeout(()=>document.getElementById('letter').style.display='flex',1500)
 }
-
-yesBtn.ondblclick=()=>secret.style.display='block'
 
 function heart(){
  let h=document.createElement('div')
@@ -102,19 +114,18 @@ function rose(){
  setTimeout(()=>r.remove(),5000)
 }
 
-/* FIREWORKS */
-function fireworks(){
- for(let i=0;i<80;i++){
-  let f=document.createElement('div')
-  f.className='fw'
-  f.style.left=50+'vw'
-  f.style.top=50+'vh'
-  let x=(Math.random()-0.5)*200
-  let y=(Math.random()-0.5)*200
-  f.animate([{transform:'translate(0,0)'},{transform:`translate(${x}px,${y}px)`}],{duration:800})
-  document.body.appendChild(f)
-  setTimeout(()=>f.remove(),800)
- }
+function showRing(){
+ let ring=document.createElement('div')
+ ring.className='ring'
+ ring.innerHTML='💍'
+ ring.style.left='45vw'
+ ring.style.top='40vh'
+ document.body.appendChild(ring)
+ setTimeout(()=>ring.remove(),1500)
+}
+
+function closeLetter(){
+ document.getElementById('letter').style.display='none'
 }
 
 /* SLIDESHOW */
