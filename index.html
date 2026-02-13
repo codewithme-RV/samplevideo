@@ -1,0 +1,225 @@
+<!DOCTYPE html>  <html>  
+<head>  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>Rohit ❤️ Nikita</title>  <style>  
+body{  
+margin:0;  
+font-family:Arial;  
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);  
+display:flex;  
+justify-content:center;  
+align-items:center;  
+height:100vh;  
+overflow:hidden;  
+text-align:center;  
+}  
+  
+/* CARD */  
+.card{  
+background:white;  
+padding:20px;  
+border-radius:20px;  
+max-width:420px;  
+box-shadow:0 10px 30px rgba(0,0,0,.2);  
+display:none;  
+}  
+  
+h1{color:#e91e63}  
+  
+/* SLIDESHOW */  
+.slideshow{height:220px;background:black;border-radius:15px;overflow:hidden}  
+.slideshow img{  
+width:100%;  
+height:220px;  
+object-fit:contain;  
+display:none;  
+background:black;  
+}  
+  
+/* BUTTONS */  
+.buttons{position:relative;height:120px;margin-top:10px}  
+button{  
+padding:12px 20px;  
+font-size:18px;  
+border:none;  
+border-radius:30px;  
+cursor:pointer;  
+position:absolute;  
+}  
+#yesBtn{background:#e91e63;color:white;left:40px}  
+#noBtn{left:210px}  
+  
+#message{display:none;color:#e91e63;margin-top:10px}  
+  
+/* PASSWORD */  
+#lock{  
+position:fixed;  
+inset:0;  
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);  
+display:flex;  
+justify-content:center;  
+align-items:center;  
+z-index:5;  
+}  
+#lockBox{background:white;padding:25px;border-radius:15px}  
+  
+/* EFFECTS */  
+.heart,.rose,.kiss,.ring{  
+position:fixed;  
+pointer-events:none;  
+font-size:24px;  
+}  
+.heart{animation:up 4s linear forwards}  
+.rose{top:-20px;animation:fall linear forwards}  
+.kiss{animation:pop 1s}  
+.ring{font-size:40px;animation:ring 1.2s}  
+  
+@keyframes up{to{transform:translateY(-400px);opacity:0}}  
+@keyframes fall{to{transform:translateY(110vh)}}  
+@keyframes pop{0%{opacity:0}100%{opacity:1}}  
+@keyframes ring{0%{transform:scale(0)}60%{transform:scale(1.5)}100%{transform:scale(1)}}  
+  
+/* LETTER */  
+#letter{  
+display:none;  
+position:fixed;  
+inset:0;  
+background:#000000cc;  
+justify-content:center;  
+align-items:center;  
+}  
+#letterBox{  
+background:white;  
+padding:20px;  
+border-radius:15px;  
+max-width:300px;  
+}  
+  
+/* TIMELINE */  
+#timeline{  
+display:none;  
+position:fixed;  
+inset:0;  
+background:#000000dd;  
+color:white;  
+overflow:auto;  
+}  
+</style>  </head>  <body>  <!-- PASSWORD -->  <div id="lock">  
+<div id="lockBox">  
+<h3>Enter Love Password 💖</h3>  
+<input id="pass" placeholder="cute nickname">  
+<br><br>  
+<button onclick="unlock()">Open</button>  
+</div>  
+</div>  <!-- MAIN -->  <div class="card" id="mainCard">  <div class="slideshow">  
+<img src="photo1.jpg">  
+<img src="photo2.jpg">  
+<img src="photo3.jpg">  
+<img src="photo4.jpg">  
+<img src="photo5.jpg">  
+<img src="photo6.jpg">  
+</div>  <h1>My Wifey My Nikita, will you be Rohit's Valentine? 💖</h1>  <div class="buttons">  
+<button id="yesBtn">Yes ❤️</button>  
+<button id="noBtn">No 🙈</button>  
+</div>  <div id="message">  
+I want to grow old with you, just like we’ve grown together all these years.<br>  
+You are my comfort, my happiness, my home.<br><br>  
+My sweetheart, my rashgulla, meri jaan, my candy ❤️  
+</div>  <button onclick="timeline.style.display='block'" style="position:static;margin-top:10px">  
+Our Story 📖  
+</button>  </div>  <!-- LOVE LETTER -->  <div id="letter">  
+<div id="letterBox">  
+<h3>💌 For You</h3>  
+Meeting you was luck,<br>  
+Loving you is magic,<br>  
+Staying with you forever is my dream ❤️<br><br>  
+<button onclick="letter.style.display='none'">Close</button>  
+</div>  
+</div>  <!-- TIMELINE -->  <div id="timeline">  
+<h2>Our Love Story ❤️</h2>  
+<p>💞 First Meeting — The day my life changed</p>  
+<p>😊 First Laugh — My favorite memory</p>  
+<p>💖 Today — Still choosing you everyday</p>  
+<button onclick="timeline.style.display='none'">Close</button>  
+</div>  <!-- AUDIO -->  <audio id="bgm" src="Main Teri Ho Gayi Millind Gaba 320 Kbps.mp3" loop></audio>
+
+<script>  
+  
+/* PASSWORD */  
+function unlock(){  
+let v=pass.value.toLowerCase();  
+if(v.includes("babu")||v.includes("motu")){  
+lock.style.display="none";  
+mainCard.style.display="block";  
+bgm.currentTime=10;  
+bgm.play();  
+}else alert("Wrong 😜");  
+}  
+  
+/* SLIDESHOW */  
+let i=0,slides=document.querySelectorAll(".slideshow img");  
+function show(){  
+slides.forEach(s=>s.style.display="none");  
+i=(i+1)%slides.length;  
+slides[i].style.display="block";  
+setTimeout(show,2500);  
+}  
+show();  
+  
+/* RUNNING NO */  
+noBtn.onmouseover=noBtn.onclick=function(){  
+this.style.left=Math.random()*250+"px";  
+this.style.top=Math.random()*100+"px";  
+};  
+  
+/* YES MAGIC */  
+yesBtn.onclick=()=>{  
+message.style.display="block";  
+for(let i=0;i<30;i++)heart();  
+for(let i=0;i<20;i++)rose();  
+ring();  
+setTimeout(()=>letter.style.display="flex",1200);  
+};  
+  
+/* EFFECTS */  
+function heart(){  
+let h=document.createElement("div");  
+h.className="heart";  
+h.innerHTML="💖";  
+h.style.left=Math.random()*100+"vw";  
+h.style.bottom="0";  
+document.body.appendChild(h);  
+setTimeout(()=>h.remove(),4000);  
+}  
+  
+function rose(){  
+let r=document.createElement("div");  
+r.className="rose";  
+r.innerHTML="🌹";  
+r.style.left=Math.random()*100+"vw";  
+document.body.appendChild(r);  
+setTimeout(()=>r.remove(),5000);  
+}  
+  
+function ring(){  
+let r=document.createElement("div");  
+r.className="ring";  
+r.innerHTML="💍";  
+r.style.left="45vw";  
+r.style.top="40vh";  
+document.body.appendChild(r);  
+setTimeout(()=>r.remove(),1500);  
+}  
+  
+/* KISS ON TAP */  
+document.body.addEventListener("click",e=>{  
+let k=document.createElement("div");  
+k.className="kiss";  
+k.innerHTML="😘";  
+k.style.left=e.clientX+"px";  
+k.style.top=e.clientY+"px";  
+document.body.appendChild(k);  
+setTimeout(()=>k.remove(),1000);  
+});  
+</script>  </body>  
+</html>
