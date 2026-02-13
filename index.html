@@ -5,16 +5,20 @@
 <title>Rohit ❤️ Nikita</title>
 
 <style>
+
+/* BODY — RESPONSIVE */
 body{
 margin:0;
 font-family:Arial;
 background:linear-gradient(135deg,#ff9a9e,#fad0c4);
 display:flex;
 justify-content:center;
-align-items:center;
-height:100vh;
-overflow:hidden;
+align-items:flex-start;
+min-height:100vh;
+overflow-y:auto;
 text-align:center;
+padding:20px 10px;
+box-sizing:border-box;
 }
 
 /* CARD */
@@ -22,14 +26,18 @@ text-align:center;
 background:white;
 padding:20px;
 border-radius:20px;
+width:100%;
 max-width:420px;
 box-shadow:0 10px 30px rgba(0,0,0,.2);
 display:none;
-position:relative;
-z-index:1;
+margin-bottom:30px;
 }
 
-h1{color:#e91e63}
+/* HEADING */
+h1{
+color:#e91e63;
+font-size:22px;
+}
 
 /* SLIDESHOW */
 .slideshow{
@@ -52,31 +60,35 @@ position:relative;
 height:120px;
 margin-top:10px;
 }
+
 button{
 padding:12px 20px;
-font-size:18px;
+font-size:16px;
 border:none;
 border-radius:30px;
 cursor:pointer;
 }
+
 #yesBtn{
 background:#e91e63;
 color:white;
 position:absolute;
-left:40px;
+left:30px;
 }
+
 #noBtn{
 position:absolute;
-left:210px;
+right:30px;
 }
 
 #message{
 display:none;
 color:#e91e63;
 margin-top:10px;
+font-size:16px;
 }
 
-/* PASSWORD */
+/* PASSWORD SCREEN */
 #lock{
 position:fixed;
 inset:0;
@@ -86,10 +98,13 @@ justify-content:center;
 align-items:center;
 z-index:10;
 }
+
 #lockBox{
 background:white;
 padding:25px;
 border-radius:15px;
+width:90%;
+max-width:300px;
 }
 
 /* EFFECTS */
@@ -99,6 +114,7 @@ pointer-events:none;
 font-size:24px;
 z-index:2;
 }
+
 .heart{animation:up 4s linear forwards}
 .rose{top:-20px;animation:fall linear forwards}
 .kiss{animation:pop 1s}
@@ -109,7 +125,7 @@ z-index:2;
 @keyframes pop{0%{opacity:0}100%{opacity:1}}
 @keyframes ring{0%{transform:scale(0)}60%{transform:scale(1.5)}100%{transform:scale(1)}}
 
-/* LETTER */
+/* LOVE LETTER */
 #letter{
 display:none;
 position:fixed;
@@ -119,6 +135,7 @@ justify-content:center;
 align-items:center;
 z-index:20;
 }
+
 #letterBox{
 background:white;
 padding:20px;
@@ -126,7 +143,7 @@ border-radius:15px;
 max-width:300px;
 }
 
-/* TIMELINE */
+/* STORY */
 #timeline{
 display:none;
 position:fixed;
@@ -137,6 +154,7 @@ overflow:auto;
 padding:20px;
 z-index:30;
 }
+
 </style>
 </head>
 
@@ -146,7 +164,7 @@ z-index:30;
 <div id="lock">
 <div id="lockBox">
 <h3>Enter Love Password 💖</h3>
-<input id="pass" placeholder="cute nickname">
+<input id="pass" placeholder="cute nickname" style="width:80%;padding:10px;">
 <br><br>
 <button onclick="unlock()">Open</button>
 </div>
@@ -164,7 +182,7 @@ z-index:30;
 <img src="photo6.jpeg">
 </div>
 
-<h1>My Wifey My Nikita, will you be my Valentine? 💖</h1>
+<h1>My Wifey My Nikita, will you be My Valentine? 💖</h1>
 
 <div class="buttons">
 <button id="yesBtn">Yes ❤️</button>
@@ -183,7 +201,7 @@ Our Story 📖
 
 </div>
 
-<!-- LOVE LETTER -->
+<!-- LETTER -->
 <div id="letter">
 <div id="letterBox">
 <h3>💌 For You</h3>
@@ -194,7 +212,7 @@ Staying with you forever is my dream ❤️<br><br>
 </div>
 </div>
 
-<!-- TIMELINE -->
+<!-- STORY -->
 <div id="timeline">
 <h2>Our Love Story ❤️</h2>
 <p>💞 First Meeting — The day my life changed</p>
@@ -230,33 +248,25 @@ setTimeout(show,2500);
 }
 show();
 
-/* NO BUTTON */
+/* NO BUTTON RUN */
 noBtn.onmouseover=noBtn.onclick=function(){
-this.style.left=Math.random()*250+"px";
-this.style.top=Math.random()*100+"px";
+this.style.left=Math.random()*200+"px";
+this.style.top=Math.random()*80+"px";
 };
 
 /* YES BUTTON */
 yesBtn.onclick=()=>{
 message.style.display="block";
-for(let i=0;i<30;i++)heart();
-for(let i=0;i<20;i++)rose();
+for(let i=0;i<25;i++)heart();
+for(let i=0;i<15;i++)rose();
 ring();
-setTimeout(()=>{letter.style.display="flex"},1200);
+setTimeout(()=>letter.style.display="flex",1200);
 };
 
 /* STORY */
-function openStory(){
-timeline.style.display="block";
-}
-function closeStory(){
-timeline.style.display="none";
-}
-
-/* LETTER */
-function closeLetter(){
-letter.style.display="none";
-}
+function openStory(){timeline.style.display="block";}
+function closeStory(){timeline.style.display="none";}
+function closeLetter(){letter.style.display="none";}
 
 /* EFFECTS */
 function heart(){
